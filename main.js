@@ -17,7 +17,8 @@ $(document).ready(function(){
   //End - Don't edit this JS
 
   var tlhidden = new TimelineMax({delay: 0.4})
-      .set('.hiddenonload',{opacity:1})
+    .to('.hiddenOnload',{opacity:1,duration:.3})
+  ;
 
   var tl = new TimelineMax({delay: 0.4})
 
