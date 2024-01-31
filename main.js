@@ -1,40 +1,24 @@
-$(document).ready(function(){
+PEXI.ready(function(){
+  
+    const tl = new TimelineMax({delay: 0.4, paused: true})
+    .to('#stage', 0.3, {backgroundColor: '#006cff'});
+    ;
 
+    //Listen to scroll events
+    PEXI.eventListener('scroll', function(data){
+      console.log(data);
 
+      //You can customize when it plays
+      if(data.inViewPercentage > 30) {
+        tl.play();
+      }
+      else {
+        // tl.pause(); // You can pause or reverse the timeline
+        tl.reverse();
+      }
 
-  //Start - Don't edit this JS
-  var inscreen = 0;
-  window.addEventListener("message", function(e){
-    if(e.data == 'play' && inscreen == 0) {
-      playFunc();
-      inscreen++;
-    }
-    if(e.data == 'pause' && inscreen != 0) {
-      pauseFunc();
-      inscreen = 0;
-    }
-  }, false);
-  //End - Don't edit this JS
-
-  var tlhidden = new TimelineMax({delay: 0.4})
-    .to('.hiddenOnload',{opacity:1,duration:.3})
-  ;
-
-  var tl = new TimelineMax({delay: 0.4})
-
-  ;
-
-  //all the code to excecute in screen
-  function playFunc() {
-    tl.play(0);
-  }
-
-  //all the code to excecute out screen
-  function pauseFunc() {
-    tl.pause();
-  }
-
-
+      document.querySelector('.pixels').innerHTML = data.inViewPx;
+      document.querySelector('.percentage').innerHTML = data.inViewPercentage;
+      document.querySelector('.direction').innerHTML = data.direction;
+    })
 });
-
-
